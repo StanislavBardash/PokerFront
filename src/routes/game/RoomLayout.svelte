@@ -15,14 +15,15 @@
     export let number: number;
     import { web3 } from "svelte-web3";
     import { goto } from "$app/navigation";
-    import { ethers } from "ethers";
+    import { Contract, ethers } from "ethers";
     import { onMount } from "svelte";
-    import { getAccountBalance, getSignerAddress } from '../../web3';
+    import { getAccountBalance, getSignerAddress, getSigner } from '../../web3';
     import PokerLogic from '../../contracts/PokerLogic.json';
     const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
     let accountBalance: string | null;
     let signerAddress: string | null;
-    const contract = new ethers.Contract(contractAddress, PokerLogic.abi);
+    let signer: ethers.ContractRunner | null;
+    let contract = new ethers.Contract(contractAddress, PokerLogic.abi);
     async function createGame() {
     try {
       const buyInAmount = 10;
@@ -65,6 +66,8 @@
   onMount(async () => {
         accountBalance = await getAccountBalance();
         signerAddress = await getSignerAddress();
+        signer = await getSigner();
+        contract = new ethers.Contract(contractAddress, PokerLogic.abi, signer);
       });
   </script>
   

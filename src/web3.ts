@@ -14,8 +14,8 @@ export async function getAccountBalance(): Promise<string | null> {
   if (!provider) return null;
 
   try {
-    const signer = provider.getSigner();
-    const address = await (await signer).getAddress();
+    const signer = await provider.getSigner();
+    const address = await signer.getAddress();
     const balance = await provider.getBalance(address);
 
     // Convert balance from wei to ether
@@ -31,9 +31,21 @@ export async function getSignerAddress(): Promise<string | null> {
   if (!provider) return null;
 
   try {
-    const signer = provider.getSigner();
-    const address = await (await signer).getAddress();
+    const signer = await provider.getSigner();
+    const address = await signer.getAddress();
     return address;
+  } catch (error) {
+    console.error('Error getting signer address:', error);
+    return null;
+  }
+}
+
+export async function getSigner(): Promise<ethers.ContractRunner | null> {
+  if (!provider) return null;
+
+  try {
+    const signer = await provider.getSigner();
+    return signer;
   } catch (error) {
     console.error('Error getting signer address:', error);
     return null;
