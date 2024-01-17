@@ -6,14 +6,12 @@
   </script>
   
 <main>
-	<!-- Header -->
+
 	<header>
 	  <h1>Texas Holdem</h1>
 	</header>
   
-	<!-- Room Selector -->
-  
-	<!-- Main Content -->
+
 	<section>
 
 		<PokerTableLayout room={room}/>

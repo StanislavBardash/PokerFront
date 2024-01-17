@@ -1,24 +1,23 @@
-<!-- src/routes/index.svelte -->
 
 <script lang="ts">
 	import RoomLayout from './RoomLayout.svelte';
 	import { count1, count2, count3 } from '../../stores';
-	// Define a variable to represent the current room
+
 	let currentRoom: string = '';
   
-	// Function to switch to a different room
+
 	const switchRoom = (room: string): void => {
 	  currentRoom = room;
 	};
   </script>
   
   <main>
-	<!-- Header -->
+
 	<header>
 	  <h1>Online Poker</h1>
 	</header>
   
-	<!-- Room Selector -->
+
 	<nav>
 	  <ul>
 		<li on:click={() => switchRoom('room1')}>Room 1</li>
@@ -26,8 +25,7 @@
 		<li on:click={() => switchRoom('room3')}>Room 3</li>
 	  </ul>
 	</nav>
-  
-	<!-- Main Content -->
+
 	<section>
 	  {#if currentRoom === 'room1'}
 		<RoomLayout room="Room 1" min_bet=0.000001 players_count={$count1} number={1} />
