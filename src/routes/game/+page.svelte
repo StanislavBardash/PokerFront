@@ -72,6 +72,7 @@ async function createGame() {
 	  signerAddress = await getSignerAddress();
 	  signer = await getSigner();
 	  contract = new ethers.Contract(contractAddress, PokerLogic.abi, signer);
+	//   await setupEventListeners();
 	});
   </script>
   

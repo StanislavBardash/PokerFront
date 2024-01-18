@@ -32,7 +32,7 @@
  * @name rankCodes
  * @return {Object} the ranks indexed as described above
  */
-const rankCodes: Record<number, number> = {
+const rankCodes: Record<string, number> = {
   2: 0b000000,
   3: 0b000100,
   4: 0b001000,
@@ -159,7 +159,8 @@ function cardCodes(cards: [string, string][]): number[] {
  */
 function boardCodes(board: string): number[] {
   const cards = board.trim().split(/ /);
-  return cardCodes(cards);
+  const formattedCards: [string, string][] = cards.map(card => [card, 'someDefaultValue']);
+  return cardCodes(formattedCards);
 }
 
 export {
