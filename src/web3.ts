@@ -1,4 +1,3 @@
-// web3.ts
 
 import { ethers } from 'ethers';
 
@@ -18,7 +17,6 @@ export async function getAccountBalance(): Promise<string | null> {
     const address = await signer.getAddress();
     const balance = await provider.getBalance(address);
 
-    // Convert balance from wei to ether
     const balanceInEther = ethers.formatEther(balance);
     return balanceInEther;
   } catch (error) {

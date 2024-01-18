@@ -2,7 +2,8 @@
 
     export type Props = {
       room: string,
-      min_bet: string,
+      by_in: string,
+      small_blind:string,
       players_count: number,
       number: number;
     };
@@ -10,7 +11,8 @@
   
   <script lang="ts">
     export let room: string;
-    export let min_bet: string;
+    export let small_blind: string;
+    export let by_in: string;
     export let players_count: number;
     export let number: number;
     import { web3 } from "svelte-web3";
@@ -24,19 +26,7 @@
     let signerAddress: string | null;
     let signer: ethers.ContractRunner | null;
     let contract = new ethers.Contract(contractAddress, PokerLogic.abi);
-    async function createGame() {
-    try {
-      const buyInAmount = 10;
-      const smallBlind = 5;
-
-      const transaction = await contract.createGame(buyInAmount, smallBlind);
-      await transaction.wait();
-
-      console.log('Game created successfully!');
-    } catch (error) {
-      console.error('Error creating game:', error);
-    }
-  }
+    
 
   async function joinGame() {
     try {
@@ -54,7 +44,6 @@
   }
   async function play() {
     try {
-      await createGame();
       await joinGame();
       goto('/table/' + room);
       console.log('Play successful!');
@@ -74,7 +63,8 @@
   <div class="room-layout">
     <h2>{room}</h2>
     <p>Игроков: {players_count}</p>
-    <p>Минимальная ставка {min_bet} ETH</p>
+    <p>By-in: {by_in} WEI</p>
+    <p>Small blind: {small_blind} WEI</p>
     <button on:click={play}>Play</button>
   </div>
   

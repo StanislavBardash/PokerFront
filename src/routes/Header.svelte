@@ -6,7 +6,6 @@
     let accountBalance: string | null;
     let signerAddress: string | null;
     onMount(async () => {
-        
       accountBalance = await getAccountBalance();
       signerAddress = await getSignerAddress();
     });
