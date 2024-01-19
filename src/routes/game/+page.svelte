@@ -9,7 +9,7 @@
 	const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 	let accountBalance: string | null;
 	let signerAddress: string | null;
-	let signer: ethers.ContractRunner | null;
+	let signer: ethers.ContractRunner | null = null;
 	let contract = new ethers.Contract(contractAddress, PokerLogic.abi);
 	let inputText = '';
 	let small_blind = '';
@@ -18,7 +18,6 @@
   
 	const switchRoom = async (room: number): Promise<void> => {
 		console.log(room);
-		
     selectedRoom = room;
     // Add your asynchronous logic here, if needed
   };
@@ -66,13 +65,20 @@ async function createGame() {
     console.log('Transaction failed. Handle it accordingly.');
   }
 }
-  
+
+function handleGameCreated(gameId:string, game:any) {
+  console.log(`Game ID: ${gameId}`);
+  console.log(`Game: ${JSON.stringify(game)}`);
+}
+
 	onMount(async () => {
 	  accountBalance = await getAccountBalance();
 	  signerAddress = await getSignerAddress();
 	  signer = await getSigner();
 	  contract = new ethers.Contract(contractAddress, PokerLogic.abi, signer);
-	//   await setupEventListeners();
+	  console.log(signer);
+	  contract.on('GameCreated', handleGameCreated);
+
 	});
   </script>
   
