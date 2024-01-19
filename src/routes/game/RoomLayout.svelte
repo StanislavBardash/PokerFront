@@ -64,9 +64,9 @@
       return salt;
 }
     function keccak256Hash(numberToHash: number, salt:string): string {
-      console.log(`salt is: ${salt}`);
+      console.log(`number: ${numberToHash} ,salt: ${salt}`);
       
-      return ethers.keccak256(ethers.toUtf8Bytes((numberToHash).toString() + salt))
+      return ethers.solidityPackedKeccak256(['uint8','string'],[numberToHash, salt]);
 }
 
   async function joinGame() : Promise<boolean> {
